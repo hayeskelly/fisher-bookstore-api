@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Fisher.Bookstore.Api.Models;
+using Fisher.Bookstore.Api.Data;
 
 namespace Fisher.Bookstore.Api
 {
@@ -25,8 +25,7 @@ namespace Fisher.Bookstore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AuthorContext>(opt => opt.UseInMemoryDatabase("Authors"));
-            services.AddDbContext<BookstoreContext>(opt => opt.UseInMemoryDatabase("Books"));
+            services.AddDbContext<BookstoreContext>(options => options.UseNpgsql(Configuration.GetConnectionString("BookstoreConnection")));
             services.AddMvc();
             services.AddCors(options =>
             {
@@ -46,7 +45,7 @@ namespace Fisher.Bookstore.Api
             }
 
             app.UseCors("CorsPolicy");
-            app.UseMvc();
+            //app.UseMvc();
         }
     }
 }

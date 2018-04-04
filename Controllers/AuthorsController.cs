@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fisher.Bookstore.Api.Models;
+using Fisher.Bookstore.Api.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fisher.Bookstore.Api.Controllers
@@ -10,8 +11,8 @@ namespace Fisher.Bookstore.Api.Controllers
     [Route("api/[controller]")]
     public class AuthorsController : Controller
     {
-        private readonly AuthorContext db;
-        public AuthorsController(AuthorContext db)
+        private readonly BookstoreContext db;
+        public AuthorsController(BookstoreContext db)
         {
             this.db = db;
 
